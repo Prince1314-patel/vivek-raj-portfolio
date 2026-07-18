@@ -6,7 +6,9 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_FORM_ID";
 const AIRTABLE_BASE_ID = "appdhrmfsjspfdFcs";
 const AIRTABLE_TABLE_ID = "tblVwbEHGvhTRAtBW";
 const AIRTABLE_TOKEN = import.meta.env.VITE_AIRTABLE_TOKEN;
-const MAX_PDF_BYTES = 4 * 1024 * 1024;
+const MAX_FILE_BYTES = 4 * 1024 * 1024;
+const ACCEPTED_FILE_TYPES =
+  "application/pdf,.pdf,application/msword,.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx";
 
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -24,7 +26,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState("idle");
   const [fileError, setFileError] = useState("");
   const [form, setForm] = useState({ name: "", contact: "", summary: "" });
-  const [pdfFile, setPdfFile] = useState(null);
+  const [attachedFile, setAttachedFile] = useState(null);
 
   function handleChange(e) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -32,14 +34,14 @@ export default function ContactForm() {
 
   function handleFileChange(e) {
     const file = e.target.files?.[0] ?? null;
-    if (file && file.size > MAX_PDF_BYTES) {
-      setFileError("PDF must be under 4MB.");
-      setPdfFile(null);
+    if (file && file.size > MAX_FILE_BYTES) {
+      setFileError("File must be under 4MB.");
+      setAttachedFile(null);
       e.target.value = "";
       return;
     }
     setFileError("");
-    setPdfFile(file);
+    setAttachedFile(file);
   }
 
   async function handleSubmit(e) {
@@ -68,10 +70,10 @@ export default function ContactForm() {
       if (!createResponse.ok) throw new Error("Airtable record creation failed");
       const record = await createResponse.json();
 
-      if (pdfFile) {
-        const base64 = await fileToBase64(pdfFile);
+      if (attachedFile) {
+        const base64 = await fileToBase64(attachedFile);
         await fetch(
-          `https://content.airtable.com/v0/${AIRTABLE_BASE_ID}/${record.id}/PDF/uploadAttachment`,
+          `https://content.airtable.com/v0/${AIRTABLE_BASE_ID}/${record.id}/Document/uploadAttachment`,
           {
             method: "POST",
             headers: {
@@ -79,8 +81,8 @@ export default function ContactForm() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              contentType: pdfFile.type || "application/pdf",
-              filename: pdfFile.name,
+              contentType: attachedFile.type || "application/octet-stream",
+              filename: attachedFile.name,
               file: base64,
             }),
           }
@@ -103,7 +105,7 @@ export default function ContactForm() {
 
       setStatus("success");
       setForm({ name: "", contact: "", summary: "" });
-      setPdfFile(null);
+      setAttachedFile(null);
     } catch {
       setStatus("error");
     }
@@ -151,13 +153,13 @@ export default function ContactForm() {
             className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-cream placeholder:text-muted focus:outline-none focus:border-gold"
           />
           <div>
-            <label htmlFor="pdf" className="block text-muted text-sm mb-2">
-              Attach a PDF (optional, max 4MB)
+            <label htmlFor="document" className="block text-muted text-sm mb-2">
+              Attach a PDF or Word document (optional, max 4MB)
             </label>
             <input
-              id="pdf"
+              id="document"
               type="file"
-              accept="application/pdf"
+              accept={ACCEPTED_FILE_TYPES}
               onChange={handleFileChange}
               className="w-full text-cream text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:border-border file:bg-surface file:text-cream file:cursor-pointer hover:file:border-gold"
             />
