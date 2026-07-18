@@ -1,3 +1,4 @@
+import Intro from "./components/Intro.jsx";
 import Nav from "./components/Nav.jsx";
 import Hero from "./components/Hero.jsx";
 import ContactStrip from "./components/ContactStrip.jsx";
@@ -15,6 +16,7 @@ import Footer from "./components/Footer.jsx";
 export default function App() {
   return (
     <>
+      <Intro />
       <Nav />
       <Hero />
       <ContactStrip />
