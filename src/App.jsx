@@ -8,6 +8,7 @@ import Experience from "./components/Experience.jsx";
 import Publications from "./components/Publications.jsx";
 import Skills from "./components/Skills.jsx";
 import Expertise from "./components/Expertise.jsx";
+import Media from "./components/Media.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer.jsx";
 
@@ -24,6 +25,7 @@ export default function App() {
       <Publications />
       <Skills />
       <Expertise />
+      <Media />
       <ContactForm />
       <Footer />
     </>
