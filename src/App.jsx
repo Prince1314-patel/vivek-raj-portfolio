@@ -1,7 +1,31 @@
+import Nav from "./components/Nav.jsx";
+import Hero from "./components/Hero.jsx";
+import ContactStrip from "./components/ContactStrip.jsx";
+import CurrentRole from "./components/CurrentRole.jsx";
+import SectionDivider from "./components/SectionDivider.jsx";
+import Education from "./components/Education.jsx";
+import Experience from "./components/Experience.jsx";
+import Publications from "./components/Publications.jsx";
+import Skills from "./components/Skills.jsx";
+import Expertise from "./components/Expertise.jsx";
+import ContactForm from "./components/ContactForm.jsx";
+import Footer from "./components/Footer.jsx";
+
 export default function App() {
   return (
-    <main className="min-h-screen bg-ink text-cream font-sans flex items-center justify-center">
-      <h1 className="font-display text-4xl">Vivek Raj Portfolio</h1>
-    </main>
+    <>
+      <Nav />
+      <Hero />
+      <ContactStrip />
+      <CurrentRole />
+      <Education />
+      <SectionDivider />
+      <Experience />
+      <Publications />
+      <Skills />
+      <Expertise />
+      <ContactForm />
+      <Footer />
+    </>
   );
 }
