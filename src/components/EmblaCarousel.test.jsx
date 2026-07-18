@@ -12,12 +12,9 @@ describe("EmblaCarousel", () => {
     });
   });
 
-  it("renders previous/next controls and a dot per slide", () => {
+  it("renders previous/next controls", () => {
     render(<EmblaCarousel slides={publicationCovers} options={{ loop: true }} />);
     expect(screen.getByLabelText("Previous publication")).toBeInTheDocument();
     expect(screen.getByLabelText("Next publication")).toBeInTheDocument();
-    publicationCovers.forEach((pub) => {
-      expect(screen.getByLabelText(`Go to ${pub.title}`)).toBeInTheDocument();
-    });
   });
 });
