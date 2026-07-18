@@ -24,3 +24,6 @@ yarn-error.log*
 
 # Planning docs (not part of the shipped site)
 docs/superpowers/
+
+# Local git worktrees
+.worktrees/
