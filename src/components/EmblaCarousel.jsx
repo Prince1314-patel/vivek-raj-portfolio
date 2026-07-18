@@ -5,7 +5,6 @@ import {
   PrevButton,
   usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons.jsx";
-import { DotButton, useDotButton } from "./EmblaCarouselDotButton.jsx";
 
 const TWEEN_FACTOR_BASE = 0.2;
 
@@ -14,7 +13,6 @@ export default function EmblaCarousel({ slides, options }) {
   const tweenFactor = useRef(0);
   const tweenNodes = useRef([]);
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
     usePrevNextButtons(emblaApi);
 
@@ -122,17 +120,6 @@ export default function EmblaCarousel({ slides, options }) {
         <div className="embla__buttons">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
-
-        <div className="embla__dots">
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={slides[index].id}
-              aria-label={`Go to ${slides[index].title}`}
-              selected={index === selectedIndex}
-              onClick={() => onDotButtonClick(index)}
-            />
-          ))}
         </div>
       </div>
     </div>
