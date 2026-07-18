@@ -37,7 +37,6 @@ export default function ContactForm() {
       />
       <div className="relative mx-auto max-w-4xl grid md:grid-cols-2 gap-12">
         <div>
-          <p className="uppercase tracking-[0.3em] text-gold text-xs mb-3">[ Contact ]</p>
           <h2 className="font-display text-4xl mb-6">Get in touch</h2>
           <p className="text-muted mb-2">{siteInfo.email}</p>
           <p className="text-muted mb-2">{siteInfo.phone}</p>

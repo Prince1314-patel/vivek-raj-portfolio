@@ -5,7 +5,6 @@ export default function Experience() {
   return (
     <section id="experience" className="px-6 py-24 bg-surface/40">
       <div className="mx-auto max-w-5xl">
-        <p className="uppercase tracking-[0.3em] text-gold text-xs mb-3">[ Experience ]</p>
         <h2 className="font-display text-4xl mb-12">Professional Development</h2>
         <div className="grid gap-6">
           {experience.map((job, index) => (

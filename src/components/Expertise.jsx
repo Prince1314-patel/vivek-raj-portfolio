@@ -5,7 +5,6 @@ export default function Expertise() {
   return (
     <section id="expertise" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
-        <p className="uppercase tracking-[0.3em] text-gold text-xs mb-3">[ Expertise ]</p>
         <h2 className="font-display text-4xl mb-12">Expertise</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {expertise.map((area, index) => (

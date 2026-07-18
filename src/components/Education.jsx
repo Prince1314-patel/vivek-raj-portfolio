@@ -5,7 +5,6 @@ export default function Education() {
   return (
     <section id="education" className="px-6 py-24">
       <div className="mx-auto max-w-4xl">
-        <p className="uppercase tracking-[0.3em] text-gold text-xs mb-3">[ Education ]</p>
         <h2 className="font-display text-4xl mb-12">Academic Journey</h2>
         <ol className="space-y-10 border-l border-border pl-8">
           {education.map((item, index) => (

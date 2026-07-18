@@ -17,7 +17,6 @@ export default function Publications() {
         aria-hidden="true"
       />
       <div className="relative mx-auto max-w-4xl">
-        <p className="uppercase tracking-[0.3em] text-gold text-xs mb-3">[ Publications ]</p>
         <h2 className="font-display text-4xl mb-12">Publications</h2>
         <EmblaCarousel slides={publicationCovers} options={EMBLA_OPTIONS} />
         <div className="space-y-6">

@@ -30,3 +30,4 @@ docs/superpowers/
 
 # Local Claude Code dev-server config
 .claude/
+.vercel
