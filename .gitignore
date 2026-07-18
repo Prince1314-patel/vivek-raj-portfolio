@@ -27,3 +27,6 @@ docs/superpowers/
 
 # Local git worktrees
 .worktrees/
+
+# Local Claude Code dev-server config
+.claude/

@@ -1,0 +1,122 @@
+.embla {
+  max-width: 56rem;
+  margin: 0 auto;
+
+  --slide-height: 22rem;
+  --slide-spacing: 1.5rem;
+  --slide-size: 70%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+.embla__parallax {
+  border-radius: 1rem;
+  height: var(--slide-height);
+  overflow: hidden;
+  border: 1px solid #232325;
+}
+
+.embla__parallax__layer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.embla__slide__img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.embla__parallax__img {
+  max-width: none;
+  flex: 0 0 calc(115% + (var(--slide-spacing) * 2));
+  object-fit: cover;
+}
+
+.embla__slide__caption {
+  text-align: center;
+  padding: 1.25rem 0.5rem 0;
+}
+
+.embla__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.embla__buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.embla__button {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #232325;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  color: #f5f2ec;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.embla__button:hover:not(.embla__button:disabled) {
+  border-color: #e9b872;
+  color: #e9b872;
+}
+
+.embla__button:disabled {
+  color: #6a665f;
+  cursor: default;
+}
+
+.embla__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.embla__dot {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #232325;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.embla__dot--selected {
+  background-color: #e9b872;
+}
