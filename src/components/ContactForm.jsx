@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Upload, File } from "lucide-react";
 import { siteInfo } from "../data/siteInfo.js";
 import bannerC from "../assets/photos/banner-c.jpg";
 
@@ -153,17 +154,34 @@ export default function ContactForm() {
             className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-cream placeholder:text-muted focus:outline-none focus:border-gold"
           />
           <div>
-            <label htmlFor="document" className="block text-muted text-sm mb-2">
+            <label htmlFor="document" className="block text-muted text-sm mb-3">
               Attach a PDF or Word document (optional, max 4MB)
             </label>
-            <input
-              id="document"
-              type="file"
-              accept={ACCEPTED_FILE_TYPES}
-              onChange={handleFileChange}
-              className="w-full text-cream text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:border-border file:bg-surface file:text-cream file:cursor-pointer hover:file:border-gold"
-            />
+            <div className="relative">
+              <input
+                id="document"
+                type="file"
+                accept={ACCEPTED_FILE_TYPES}
+                onChange={handleFileChange}
+                className="w-full absolute inset-0 opacity-0 cursor-pointer"
+              />
+              <button
+                type="button"
+                className="w-full flex items-center justify-center gap-2 bg-ink border-2 border-gold text-gold font-medium rounded-lg px-4 py-3 hover:bg-gold/10 transition-colors"
+              >
+                <Upload size={18} />
+                <span>
+                  {attachedFile ? attachedFile.name : "Choose File"}
+                </span>
+              </button>
+            </div>
             {fileError && <p className="text-red-400 text-sm mt-2">{fileError}</p>}
+            {attachedFile && (
+              <div className="flex items-center gap-2 text-gold text-sm mt-2">
+                <File size={14} />
+                <span>{attachedFile.name}</span>
+              </div>
+            )}
           </div>
           <button
             type="submit"
