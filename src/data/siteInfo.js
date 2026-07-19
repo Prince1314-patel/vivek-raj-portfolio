@@ -11,6 +11,7 @@ export const siteInfo = {
     facebook: "https://www.facebook.com/share/195ERLyKQv/",
     twitter: "https://x.com/Adv_VivekRaj?t=lqOA3rG_8nSZtXHy93tZWg&s=08",
     instagram: "https://www.instagram.com/vivekraj_speaks?igsh=cHp4eGxtanlqaTNp",
+    whatsapp: "https://wa.me/919354820575",
   },
   currentRole: {
     title: "Secretary",

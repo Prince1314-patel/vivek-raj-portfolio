@@ -12,6 +12,7 @@ import Expertise from "./components/Expertise.jsx";
 import Media from "./components/Media.jsx";
 import ContactForm from "./components/ContactForm.jsx";
 import Footer from "./components/Footer.jsx";
+import WhatsAppWidget from "./components/WhatsAppWidget.jsx";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
       <Media />
       <ContactForm />
       <Footer />
+      <WhatsAppWidget />
     </>
   );
 }
