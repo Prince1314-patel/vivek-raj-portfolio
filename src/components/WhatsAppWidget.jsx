@@ -27,7 +27,7 @@ export default function WhatsAppWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="w-72 sm:w-80 rounded-2xl border border-border bg-ink shadow-2xl overflow-hidden"
+            className="w-72 sm:w-80 overflow-hidden border-2 border-sumi bg-paper shadow-pull"
           >
             <div className="flex items-center justify-between bg-[#128C7E] px-4 py-3">
               <div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ export default function WhatsAppWidget() {
             </div>
 
             <div className="px-4 py-4">
-              <div className="rounded-lg rounded-tl-none bg-white/5 px-3 py-2 text-sm text-cream/90">
+              <div className="border-2 border-sumi bg-riso-yellow/50 px-3 py-2 text-sm text-sumi">
                 Hi there 👋
                 <br />
                 How can I help you?
@@ -87,7 +87,7 @@ export default function WhatsAppWidget() {
         onClick={() => setOpen((v) => !v)}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/30"
+        className="flex h-14 w-14 items-center justify-center border-2 border-sumi bg-[#25D366] text-white shadow-pull"
       >
         <AnimatePresence mode="wait" initial={false}>
           {open ? (

@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Upload, File } from "lucide-react";
+import { Upload, File, Check } from "lucide-react";
 import { siteInfo } from "../data/siteInfo.js";
-import bannerC from "../assets/photos/banner-c.jpg";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/REPLACE_WITH_FORM_ID";
 const AIRTABLE_BASE_ID = "appdhrmfsjspfdFcs";
@@ -22,6 +21,9 @@ function fileToBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
+const inputClass =
+  "w-full border-2 border-sumi bg-paper px-4 py-3 font-sans text-sumi placeholder:text-sumi/45 focus:outline-none focus:bg-riso-yellow/40 focus:ring-0";
 
 export default function ContactForm() {
   const [status, setStatus] = useState("idle");
@@ -113,91 +115,130 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="relative px-6 py-24 overflow-hidden">
-      <div
-        data-testid="contact-banner"
-        className="absolute inset-0 opacity-[0.06] bg-cover bg-center"
-        style={{ backgroundImage: `url(${bannerC})` }}
-        aria-hidden="true"
-      />
-      <div className="relative mx-auto max-w-4xl grid md:grid-cols-2 gap-12">
+    <section
+      id="contact"
+      data-testid="contact-banner"
+      className="grain relative border-t-2 border-sumi bg-riso-blue px-5 py-24 text-paper sm:px-8"
+    >
+      <div className="relative mx-auto grid max-w-5xl gap-12 md:grid-cols-2">
+        {/* ---- left: the studio order desk ---- */}
         <div>
-          <h2 className="font-display text-4xl mb-6">Get in touch</h2>
-          <p className="text-muted mb-2">{siteInfo.email}</p>
-          <p className="text-muted mb-2">{siteInfo.phone}</p>
-          <p className="text-muted">{siteInfo.location}</p>
+          <p className="slug mb-3 text-paper/60">ORDER DESK · OPEN FOR COMMISSIONS</p>
+          <h2 className="misprint-paper font-display text-5xl font-black tracking-poster sm:text-6xl">
+            Get in touch
+          </h2>
+          <p className="mt-5 max-w-sm leading-relaxed text-paper/85">
+            Send the brief. I&apos;ll pull a proof and get back to you — policy work,
+            campaigns, writing, or a project that needs an artist&apos;s eye.
+          </p>
+          <dl className="mt-8 space-y-3 font-mono text-sm">
+            <div className="flex gap-3">
+              <dt className="slug w-16 text-riso-yellow">MAIL</dt>
+              <dd className="text-paper">{siteInfo.email}</dd>
+            </div>
+            <div className="flex gap-3">
+              <dt className="slug w-16 text-riso-yellow">TEL</dt>
+              <dd className="text-paper">{siteInfo.phone}</dd>
+            </div>
+            <div className="flex gap-3">
+              <dt className="slug w-16 text-riso-yellow">STUDIO</dt>
+              <dd className="text-paper">{siteInfo.location}</dd>
+            </div>
+          </dl>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            required
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Name"
-            className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-cream placeholder:text-muted focus:outline-none focus:border-gold"
-          />
-          <input
-            required
-            name="contact"
-            value={form.contact}
-            onChange={handleChange}
-            placeholder="Phone or Email"
-            className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-cream placeholder:text-muted focus:outline-none focus:border-gold"
-          />
-          <textarea
-            required
-            name="summary"
-            value={form.summary}
-            onChange={handleChange}
-            placeholder="Summary of the case"
-            rows={5}
-            className="w-full bg-surface border border-border rounded-lg px-4 py-3 text-cream placeholder:text-muted focus:outline-none focus:border-gold"
-          />
-          <div>
-            <label htmlFor="document" className="block text-muted text-sm mb-3">
-              Attach a PDF or Word document (optional, max 4MB)
-            </label>
-            <div className="relative">
+
+        {/* ---- right: the commission slip ---- */}
+        <form
+          onSubmit={handleSubmit}
+          className="crops relative border-2 border-sumi bg-paper p-6 text-sumi shadow-pull sm:p-7"
+        >
+          <span className="crops-b" aria-hidden="true" />
+          <p className="slug mb-5 flex items-center justify-between text-sumi/55">
+            <span>COMMISSION SLIP</span>
+            <span>FORM VR-C</span>
+          </p>
+
+          <div className="space-y-4">
+            <label className="block">
+              <span className="slug mb-1.5 block text-sumi/70">Name</span>
               <input
-                id="document"
-                type="file"
-                accept={ACCEPTED_FILE_TYPES}
-                onChange={handleFileChange}
-                className="w-full absolute inset-0 opacity-0 cursor-pointer"
+                required
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Your name"
+                className={inputClass}
               />
-              <button
-                type="button"
-                className="w-full flex items-center justify-center gap-2 bg-ink border-2 border-gold text-gold font-medium rounded-lg px-4 py-3 hover:bg-gold/10 transition-colors"
-              >
-                <Upload size={18} />
-                <span>
+            </label>
+            <label className="block">
+              <span className="slug mb-1.5 block text-sumi/70">Phone or Email</span>
+              <input
+                required
+                name="contact"
+                value={form.contact}
+                onChange={handleChange}
+                placeholder="How to reach you"
+                className={inputClass}
+              />
+            </label>
+            <label className="block">
+              <span className="slug mb-1.5 block text-sumi/70">The brief</span>
+              <textarea
+                required
+                name="summary"
+                value={form.summary}
+                onChange={handleChange}
+                placeholder="What do you have in mind?"
+                rows={5}
+                className={inputClass}
+              />
+            </label>
+
+            <div>
+              <span className="slug mb-1.5 block text-sumi/70">
+                Attach a PDF or Word doc (optional, max 4MB)
+              </span>
+              <div className="relative">
+                <input
+                  id="document"
+                  type="file"
+                  accept={ACCEPTED_FILE_TYPES}
+                  onChange={handleFileChange}
+                  className="absolute inset-0 w-full cursor-pointer opacity-0"
+                />
+                <span className="flex w-full items-center justify-center gap-2 border-2 border-dashed border-sumi bg-paper px-4 py-3 font-mono text-sm uppercase tracking-wide text-sumi transition-colors hover:bg-riso-yellow/40">
+                  <Upload size={16} />
                   {attachedFile ? attachedFile.name : "Choose File"}
                 </span>
-              </button>
-            </div>
-            {fileError && <p className="text-red-400 text-sm mt-2">{fileError}</p>}
-            {attachedFile && (
-              <div className="flex items-center gap-2 text-gold text-sm mt-2">
-                <File size={14} />
-                <span>{attachedFile.name}</span>
               </div>
+              {fileError && <p className="mt-2 font-mono text-sm text-sumi">⚠ {fileError}</p>}
+              {attachedFile && (
+                <div className="mt-2 flex items-center gap-2 font-mono text-sm text-riso-blue">
+                  <File size={14} />
+                  <span>{attachedFile.name}</span>
+                </div>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="stamp w-full justify-center border-sumi bg-riso-pink py-3 text-sumi transition-transform hover:rotate-0 disabled:opacity-60"
+            >
+              {status === "sending" ? "Pulling proof…" : "✦ Send the brief"}
+            </button>
+
+            {status === "success" && (
+              <p className="flex items-center gap-2 font-mono text-sm text-riso-blue">
+                <Check size={16} /> Printed &amp; filed — I&apos;ll get back to you soon.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="border-2 border-riso-pink bg-riso-pink/15 px-3 py-2 font-mono text-sm text-sumi">
+                ⚠ Jam in the press. Please email me directly instead.
+              </p>
             )}
           </div>
-          <button
-            type="submit"
-            disabled={status === "sending"}
-            className="bg-cream text-ink font-medium rounded-lg px-6 py-3 hover:bg-gold transition-colors disabled:opacity-60"
-          >
-            {status === "sending" ? "Sending..." : "Send message"}
-          </button>
-          {status === "success" && (
-            <p className="text-gold text-sm">Thanks — I&apos;ll get back to you soon.</p>
-          )}
-          {status === "error" && (
-            <p className="text-red-400 text-sm">
-              Something went wrong. Please email me directly instead.
-            </p>
-          )}
         </form>
       </div>
     </section>

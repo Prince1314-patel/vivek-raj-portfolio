@@ -22,7 +22,7 @@ const ICONS = [
 
 export default function SocialLinks({ className = "" }) {
   return (
-    <div className={`flex items-center gap-4 ${className}`}>
+    <div className={`flex items-center gap-2.5 ${className}`}>
       {ICONS.map(({ key, Icon, href, label }) => (
         <a
           key={key}
@@ -30,9 +30,9 @@ export default function SocialLinks({ className = "" }) {
           target="_blank"
           rel="noreferrer"
           aria-label={label}
-          className="text-cream/70 hover:text-gold transition-colors"
+          className="flex h-9 w-9 items-center justify-center border-2 border-current text-current transition-all hover:border-riso-pink hover:bg-riso-pink hover:text-sumi"
         >
-          <Icon size={20} />
+          <Icon size={16} />
         </a>
       ))}
     </div>

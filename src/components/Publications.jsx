@@ -1,62 +1,79 @@
 import { useState } from "react";
 import Reveal from "./Reveal.jsx";
+import PlateHeading from "./PlateHeading.jsx";
 import CoverflowGallery from "./CoverflowGallery.jsx";
 import "./embla.css";
 import { publications } from "../data/publications.js";
 import { publicationCovers } from "../data/publicationCovers.js";
-import bannerB from "../assets/photos/banner-b.jpg";
 
 export default function Publications() {
   const [activeCover, setActiveCover] = useState(0);
   const activePub = publicationCovers[activeCover];
 
   return (
-    <section id="publications" className="relative px-6 py-24 overflow-hidden">
-      <div
-        data-testid="publications-banner"
-        className="absolute inset-0 opacity-[0.06] bg-cover bg-center"
-        style={{ backgroundImage: `url(${bannerB})` }}
-        aria-hidden="true"
-      />
+    <section
+      id="publications"
+      data-testid="publications-banner"
+      className="grain relative border-b-2 border-sumi bg-paperDeep px-5 py-24 sm:px-8"
+    >
       <div className="relative mx-auto max-w-4xl">
-        <h2 className="font-display text-4xl mb-12">Publications</h2>
-        <CoverflowGallery
-          slides={publicationCovers}
-          onActiveChange={setActiveCover}
-        />
-        {activePub && (
-          <div className="text-center mt-6 mb-2 px-4">
-            <h3 className="font-display text-lg">{activePub.title}</h3>
-            {activePub.venue && (
-              <p className="text-gold text-sm mt-1">{activePub.venue}</p>
-            )}
-            {activePub.description && (
-              <p className="text-cream/80 text-sm mt-2 max-w-2xl mx-auto">
-                {activePub.description}
-              </p>
-            )}
-          </div>
-        )}
-        <div className="space-y-6">
-          {publications.map((pub, index) => (
-            <Reveal key={pub.id} delay={index * 0.04} className="border-b border-border pb-6">
-              {pub.url ? (
-                <a
-                  href={pub.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-display text-xl hover:text-gold transition-colors"
-                >
-                  {pub.title}
-                </a>
-              ) : (
-                <h3 className="font-display text-xl">{pub.title}</h3>
+        <PlateHeading slug="THE ZINE RACK" title="Publications" plate="E" />
+
+        <div className="crops relative mb-6 border-2 border-sumi bg-paper py-6">
+          <span className="crops-b" aria-hidden="true" />
+          <CoverflowGallery slides={publicationCovers} onActiveChange={setActiveCover} />
+          {activePub && (
+            <div className="mx-auto mt-5 max-w-2xl px-5 text-center">
+              <h3 className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-sumi">
+                {activePub.title}
+              </h3>
+              {activePub.venue && (
+                <p className="mt-1 font-mono text-sm text-riso-blue">{activePub.venue}</p>
               )}
-              <p className="text-gold text-sm mt-1">{pub.venue}</p>
-              {pub.description && <p className="text-cream/80 text-sm mt-2">{pub.description}</p>}
+              {activePub.description && (
+                <p className="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-sumi/80">
+                  {activePub.description}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* the full catalogue, printed as a stamped index */}
+        <ol className="border-t-2 border-sumi">
+          {publications.map((pub, index) => (
+            <Reveal
+              as="li"
+              key={pub.id}
+              delay={index * 0.03}
+              className="group flex gap-4 border-b-2 border-sumi py-5"
+            >
+              <span className="slug shrink-0 pt-1 text-sumi/70">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                {pub.url ? (
+                  <a
+                    href={pub.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-sumi underline-offset-4 transition-colors hover:text-riso-pink hover:underline"
+                  >
+                    {pub.title}
+                  </a>
+                ) : (
+                  <h3 className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-sumi">
+                    {pub.title}
+                  </h3>
+                )}
+                <p className="mt-1 font-mono text-sm text-riso-blue">{pub.venue}</p>
+                {pub.description && (
+                  <p className="mt-2 text-sm leading-relaxed text-sumi/80">{pub.description}</p>
+                )}
+              </div>
             </Reveal>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
